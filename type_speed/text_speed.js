@@ -34,11 +34,11 @@ handleKeypress = (e) => {
   } else if (e.target.value + e.key === quote && done === false) {
     clearInterval(interval);
     done = true;
-    $j('p').attr('style', `color="red"`)
+    $j('p').attr('style', 'color: green')
   } else if (e.target.value.length >= quote.length) {
-    errorMessage = 'Incorrect Quote';
+    $j('p').attr('style', 'color: red')
   } else if (e.target.value.length === quote.length) {
-    errorMessage = '';
+    $j('p').attr('style', 'color: black')
   }
 };
 
