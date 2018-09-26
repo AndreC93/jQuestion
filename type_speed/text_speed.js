@@ -96,7 +96,7 @@ class TextSpeed {
     $j('h3').attr('style', 'color: green');
     $j('h3').html('You Finished!!!');
     $j('html').attr('style', `background: url(${this.celebrationGifs[Math.floor(Math.random() * this.celebrationGifs.length)]}) no-repeat center center fixed; background-size: cover;`);
-    $j('body').attr('style', this.defaultBodyStyling + ' margin-top: 580px; transition: margin-top 1s ease-in;');
+    $j('body').attr('style', this.defaultBodyStyling + ' margin-top: 85vh; transition: margin-top 1s ease-in;');
     $j('button').each( button => button.focus());
   }
 
