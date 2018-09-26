@@ -15,7 +15,7 @@ A JavaScript library for making HTML manipulation and traversal, event handling,
 ### Many methods available to alter or select elements relative to selected element: 
    * `.html(string)`: use to overwrite the innerHTML of all the selected elements, or if given no argument, will return the innerHTML of the first element in the selected elements.
    * `.empty()`: will replace all innerHTML of the selected elements with ''.
-   * `.append(children)`: use to append HTML elements to each of the selected elements, works with strings (such as '<p>Hello</p>'), HTML elements, or instances of jQuestion. 
+   * `.append(children)`: use to append HTML elements to each of the selected elements, works with strings (such as `<p>Hello</p>`), HTML elements, or instances of jQuestion. 
    * `.attr(attributeName, value)`: use to set a certain attribute(s) of the selected elements. 
       * If attributeName is a string:
         * and value is null or '', will remove that attribute from all selected elements
