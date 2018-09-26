@@ -63,7 +63,7 @@ class TextSpeed {
     $j('textarea').on('change', ((e) => this.handleChange(e)));
     $j('textarea').on('keydown', ((e) => this.handleChange(e)));
     $j('textarea').attr('style', 'font-size: 20px;');
-    $j('textarea').bind("cut copy paste", e => e.preventDefault());
+    $j('textarea').on("cut copy paste", e => e.preventDefault());
     $j('button').on('click', () => this.handleClick())
     $j('button').attr('style', 'padding: 6px 10px; color: brown; background: azure; font-weight: bolder;');
   }
