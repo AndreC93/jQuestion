@@ -38,7 +38,7 @@ let interval;
 document.addEventListener("DOMContentLoaded", () => {
   $j('html').attr('style', "background: url('https://www.textrazor.com/img/letters_inverse.png')");
   $j('body').attr('style', 
-    "background: white; margin: 100px auto; text-align: center; width: 700px; padding: 20px;");
+  "background: white; margin: 100px auto; text-align: center; width: 700px; padding: 20px;");
   $j('.main').append('<div><h1>Welcome to Text Speed Test</h1><span></span><h2></h2><section/></div>');
   $j('span').html('Type out the quote below and see how fast you can do it without typos.')
   $j('span').attr('style', 'font-style: italic;')
@@ -53,20 +53,33 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 const handleKeypress = (e) => {
-  if (startTime === undefined) {
-    startTime = new Date;
-    interval = setInterval(() => $j('p').html(`${generateTimeScore(startTime)}`, 1000));
-  } else if (e.target.value + e.key === quote && done === false) {
-    clearInterval(interval);
-    done = true;
-    $j('p').attr('style', 'color: green');
-  } else if (e.target.value.length >= quote.length) {
-    $j('p').attr('style', 'color: red');
-    $j('h3').html('Invalid Text!!!');
-  } else if (e.target.value.length <= quote.length) {
-    $j('p').attr('style', 'color: black');
-    $j('h3').html('');
+  if (done) {
+    e.preventDefault();
+  } else {
+    if (startTime === undefined) {
+      startTime = new Date;
+      interval = setInterval(() => $j('p').html(`${generateTimeScore(startTime)}`, 1000));
+    } else if (e.target.value + e.key === quote && done === false) {
+      handleSuccess(e);
+    } else if (e.target.value.length >= quote.length) {
+      $j('p').attr('style', 'color: red');
+      $j('h3').attr('style', 'color: red');
+      $j('h3').html('Invalid Text!!!');
+    } else if (e.target.value.length <= quote.length) {
+      $j('p').attr('style', 'color: black');
+      $j('h3').html('');
+    }
   }
+};
+
+const handleSuccess = (e) => {
+  done = true;
+  clearInterval(interval);
+  setTimeout(() => $j('p').attr('style', 'color: green; font-size: 24px;'), 50);
+  $j('textarea').val(e.target.value + e.key);
+  $j('h3').attr('style', 'color: green');
+  $j('h3').html('You Finished!!!');
+  $j('html').attr('style', "background: url('https://media.giphy.com/media/26tOZ42Mg6pbTUPHW/giphy.gif') no-repeat center center fixed; background-size: cover;");
 };
 
 const handleClick = () => {
@@ -75,6 +88,10 @@ const handleClick = () => {
   startTime = undefined;
   done = false;
   setTimeout(() => clearInterval(interval), 1000);
+  $j('textarea').val('');
+  $j('p').attr('style', 'color: black');
+  $j('h3').html('');
+  $j('html').attr('style', "background: url('https://www.textrazor.com/img/letters_inverse.png')");
 };
 
 const generateTimeScore = (start, end = (new Date)) => {
