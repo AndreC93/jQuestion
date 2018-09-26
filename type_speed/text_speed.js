@@ -16,24 +16,25 @@ generateRandomIndex = () => Math.floor(Math.random() * quotes.length);
 const quote = quotes[generateRandomIndex()];
 
 let startTime;
-let endTime;
+let done = false;
 let errorMessage = '';
+let interval;
 
 document.addEventListener("DOMContentLoaded", () => {
   $j('.main').append('<div><h1>Welcome to Text Speed Test</h1><h2></h2></div>')
   $j('.main').find('h2').html(quote).append('<br>').append("<textarea rows='6' cols='80' class='text-box' >");
-  $j('.text-box').on('keypress', (e) => handleKeypress(e));
   $j('.main').append(`<p>${generateTimeScore(startTime)}</p>`)
-
+  $j('textarea').on('keypress', ((e) => handleKeypress(e)));
 });
 
 handleKeypress = (e) => {
   if (startTime === undefined) {
     startTime = new Date;
-    setInterval(() => $j('p').html(`${generateTimeScore(startTime)}`, 1000));
-  } else if (e.target.value === quote && endTime === undefined) {
-    endTime = new Date;
-    generateTimeScore(startTime, endTime);
+    interval = setInterval(() => $j('p').html(`${generateTimeScore(startTime)}`, 1000));
+  } else if (e.target.value + e.key === quote && done === false) {
+    clearInterval(interval);
+    done = true;
+    $j('p').attr('style', `color="red"`)
   } else if (e.target.value.length >= quote.length) {
     errorMessage = 'Incorrect Quote';
   } else if (e.target.value.length === quote.length) {
