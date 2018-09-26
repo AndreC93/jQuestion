@@ -29,7 +29,7 @@ class TextSpeed {
       'http://blog.colourfulrebel.com/en/files/2017/07/Claps-harry-potter-22669610-500-211.gif'
     ];
     this.handleClick = this.handleClick.bind(this);
-    this.handleKeypress = this.handleKeypress.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.handleSuccess = this.handleSuccess.bind(this);
   }
 
@@ -60,24 +60,24 @@ class TextSpeed {
     $j('section').append('<br>').append("<textarea rows='6' cols='60' >");
     $j('.main').append(`<p>${this.generateTimeScore(this.startTime)}</p>`).append(`<h3 style='color: red' ></h3>`);
     $j('.main').append('<button>Reset Text</button>');
-    $j('textarea').on('keypress', ((e) => this.handleKeypress(e)));
-    $j('textarea').on('keydown', ((e) => this.handleKeypress(e)));
+    $j('textarea').on('change', ((e) => this.handleChange(e)));
+    $j('textarea').on('keydown', ((e) => this.handleChange(e)));
     $j('textarea').attr('style', 'font-size: 20px;');
     $j('textarea').bind("cut copy paste", e => e.preventDefault());
     $j('button').on('click', () => this.handleClick())
     $j('button').attr('style', 'padding: 6px 10px; color: brown; background: azure; font-weight: bolder;');
   }
 
-  handleKeypress(e) {
+  handleChange(e) {
     if (this.done) {
       e.preventDefault();
     } else {
       if (this.startTime === undefined) {
         this.startTime = new Date;
         this.interval = setInterval(() => $j('p').html(`${this.generateTimeScore(this.startTime)}`, 1000));
-      } else if (e.target.value + e.key === this.quote && this.done === false) {
+      } else if ((e.target.value === this.quote || e.target.value + e.key === this.quote) && this.done === false) {
         this.handleSuccess(e);
-      } else if (e.target.value.length >= this.quote.length) {
+      } else if (e.target.value.length + 1 >= this.quote.length) {
         $j('p').attr('style', 'color: red');
         $j('h3').attr('style', 'color: red');
         $j('h3').html('Invalid Text!!!');
@@ -92,11 +92,12 @@ class TextSpeed {
     this.done = true;
     clearInterval(this.interval);
     setTimeout(() => $j('p').attr('style', 'color: green; font-size: 24px;'), 50);
-    $j('textarea').val(e.target.value + e.key);
+    // $j('textarea').val(e.target.value + e.key);
     $j('h3').attr('style', 'color: green');
     $j('h3').html('You Finished!!!');
     $j('html').attr('style', `background: url(${this.celebrationGifs[Math.floor(Math.random() * this.celebrationGifs.length)]}) no-repeat center center fixed; background-size: cover;`);
     $j('body').attr('style', this.defaultBodyStyling + ' margin-top: 580px; transition: margin-top 1s ease-in;');
+    $j('button').each( button => button.focus());
   }
 
   handleClick() {
@@ -116,7 +117,6 @@ class TextSpeed {
   generateTimeScore(start, end = (new Date)) {
     if (start === undefined) return 'Time will start when you start typing.';
     const diff = (end - start) / 1000;
-    const seconds = Math.round(diff);
-    return `${seconds} seconds`;
+    return `${diff} seconds`;
   }
 }
