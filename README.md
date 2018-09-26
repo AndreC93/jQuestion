@@ -12,7 +12,7 @@ A JavaScript library for making HTML manipulation and traversal, event handling,
 
 * Use `$j(callback)` to queue up functions to be invoked when the DOM is loaded. 
 
-* Many methods available to alter or select elements relative to selected element: 
+### Many methods available to alter or select elements relative to selected element: 
    * `.html(string)`: use to overwrite the innerHTML of all the selected elements, or if given no argument, will return the innerHTML of the first element in the selected elements.
    * `.empty()`: will replace all innerHTML of the selected elements with ''.
    * `.append(children)`: use to append HTML elements to each of the selected elements, works with strings (such as '<p>Hello</p>'), HTML elements, or instances of jQuestion. 
