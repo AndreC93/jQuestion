@@ -23,10 +23,10 @@ class TextSpeed {
     this.done = false;
     this.interval;
     this.defaultBodyStyling = 'background: white; margin: 100px auto; text-align: center; width: 700px; padding: 20px;';
-    this.celebrationGifs = ['https://media.giphy.com/media/qLHzYjlA2FW8g/giphy.gif',
-      'http://digitalspyuk.cdnds.net/17/03/640x257/gallery-1484906228-hogwarts-cheers-claps-with-excitement-in-harry-potter.gif',
-      'http://media.tumblr.com/tumblr_mbyg32QF0N1rw2gyh.gif',
-      'http://blog.colourfulrebel.com/en/files/2017/07/Claps-harry-potter-22669610-500-211.gif'
+    this.celebrationGifs = ['./images/clapping.gif',
+      './images/emma_watson.gif',
+      './images/hats_off.gif',
+      './images/snape.gif'
     ];
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
