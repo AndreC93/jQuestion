@@ -23,10 +23,10 @@ class TextSpeed {
     this.done = false;
     this.interval;
     this.defaultBodyStyling = 'background: white; margin: 100px auto; text-align: center; width: 700px; padding: 20px;';
-    this.celebrationGifs = ['./images/clapping.gif',
-      './images/emma_watson.gif',
-      './images/hats_off.gif',
-      './images/snape.gif'
+    this.celebrationGifs = ['./type_speed/images/clapping.gif',
+      './type_speed/images/emma_watson.gif',
+      './type_speed/images/hats_off.gif',
+      './type_speed/images/snape.gif'
     ];
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
