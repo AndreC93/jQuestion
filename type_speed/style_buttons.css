@@ -1,0 +1,31 @@
+#personal-links {
+  position: relative;
+  height: 40px;
+  width: 125px;
+  text-align: center;
+}
+
+#personal-links img {
+  width: 30px;
+  height: 30px;
+}
+
+#personal-links img:hover {
+  width: 35px;
+  height: 35px;
+}
+
+#personal-links a:first-of-type {
+  position: absolute;
+  left: 290px;
+}
+
+#personal-links a:nth-of-type(2) {
+  position: absolute;
+  left: 335px;
+}
+
+#personal-links a:nth-of-type(3) {
+  position: absolute;
+  left: 375px;
+}
