@@ -1,5 +1,5 @@
 # jQuestion
-A JavaScript library for making HTML manipulation and traversal, event handling, and AJAX much more straightforward. It has an easy to learn API for developers of all levels.
+A JavaScript library for making HTML manipulation and traversal, event handling, and AJAX easier. It has a simple API for developers of all levels.
 
 ## Live Demo
 [Text Speed Test](http://www.andrechow.com/jQuestion/ "Text Speed Test"): A typing speed timer that records how fast you can type a random Harry Potter quote, built using only jQuestion and JavaScript. 
