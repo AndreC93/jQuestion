@@ -89,7 +89,7 @@ class TextSpeed {
           const quoteLetter = $j(`.q${i}`);
           if (quoteLetter.html() === inputStr[i] || (i === inputStr.length && e.key === quoteLetter.html())) {
             $j(`.q${i}`).attr('style','color: green; display: inline-block; white-space: pre;');
-          } else {
+          } else if(e.key) {
             $j(`.q${i}`).attr('style', 'color: red; display: inline-block; white-space: pre;')
           }
         }
