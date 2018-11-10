@@ -56,7 +56,10 @@ class TextSpeed {
     $j('.main').append('<div><h1>Welcome to Text Speed Test</h1><span></span><h2></h2><section/></div>');
     $j('span').html('Type out the quote below and see how fast you can do it without typos.')
     $j('span').attr('style', 'font-style: italic;')
-    $j('h2').html(this.quote);
+    for(let i = 0; i < this.quote.length; i++) {
+      const letter = `<figcaption class='q${i}' style='display: inline-block; white-space: pre;'>${this.quote[i]}</figcaption>`
+      $j('h2').append(letter);
+    }
     $j('section').append('<br>').append("<textarea rows='6' cols='60' >");
     $j('.main').append(`<p>${this.generateTimeScore(this.startTime)}</p>`).append(`<h3 style='color: red' ></h3>`);
     $j('.main').append('<button>Reset Text</button>');
@@ -77,14 +80,28 @@ class TextSpeed {
         this.interval = setInterval(() => $j('p').html(`${this.generateTimeScore(this.startTime)}`, 1000));
       } else if ((e.target.value === this.quote || e.target.value + e.key === this.quote) && this.done === false) {
         this.handleSuccess(e);
-      } else if (e.target.value.length + 1 >= this.quote.length) {
-        $j('p').attr('style', 'color: red');
-        $j('h3').attr('style', 'color: red');
-        $j('h3').html('Invalid Text!!!');
-      } else if (e.target.value.length <= this.quote.length) {
-        $j('p').attr('style', 'color: black');
-        $j('h3').html('');
+      } else if (e.key === 'Backspace'){
+        const deleteIdx = e.target.value.length -1;
+        $j(`.q${deleteIdx}`).attr('style', 'color: black; display: inline-block; white-space: pre;');
+      } else {
+        const inputStr = e.target.value;
+        for(let i = 0; i <= inputStr.length; i++) {
+          const quoteLetter = $j(`.q${i}`);
+          if (quoteLetter.html() === inputStr[i] || (i === inputStr.length && e.key === quoteLetter.html())) {
+            $j(`.q${i}`).attr('style','color: green; display: inline-block; white-space: pre;');
+          } else {
+            $j(`.q${i}`).attr('style', 'color: red; display: inline-block; white-space: pre;')
+          }
+        }
       }
+      // } else if (e.target.value.length + 1 >= this.quote.length) {
+      //   $j('p').attr('style', 'color: red');
+      //   $j('h3').attr('style', 'color: red');
+      //   $j('h3').html('Invalid Text!!!');
+      // } else if (e.target.value.length <= this.quote.length) {
+      //   $j('p').attr('style', 'color: black');
+      //   $j('h3').html('');
+      // }
     }
   }
 
