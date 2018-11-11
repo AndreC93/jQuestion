@@ -56,10 +56,7 @@ class TextSpeed {
     $j('.main').append('<div><h1>Welcome to Text Speed Test</h1><span></span><h2></h2><section/></div>');
     $j('span').html('Type out the quote below and see how fast you can do it without typos.')
     $j('span').attr('style', 'font-style: italic;')
-    for(let i = 0; i < this.quote.length; i++) {
-      const letter = `<figcaption class='q${i}' style='display: inline-block; white-space: pre;'>${this.quote[i]}</figcaption>`
-      $j('h2').append(letter);
-    }
+    this.makeQuote();
     $j('section').append('<br>').append("<textarea rows='6' cols='60' >");
     $j('.main').append(`<p>${this.generateTimeScore(this.startTime)}</p>`).append(`<h3 style='color: red' ></h3>`);
     $j('.main').append('<button>Reset Text</button>');
@@ -69,6 +66,13 @@ class TextSpeed {
     $j('textarea').on("cut copy paste", e => e.preventDefault());
     $j('button').on('click', () => this.handleClick())
     $j('button').attr('style', 'padding: 6px 10px; color: brown; background: azure; font-weight: bolder;');
+  }
+
+  makeQuote() {
+    for (let i = 0; i < this.quote.length; i++) {
+      const letter = `<figcaption class='q${i}' style='display: inline-block; white-space: pre;'>${this.quote[i]}</figcaption>`
+      $j('h2').append(letter);
+    }
   }
 
   handleChange(e) {
@@ -94,14 +98,6 @@ class TextSpeed {
           }
         }
       }
-      // } else if (e.target.value.length + 1 >= this.quote.length) {
-      //   $j('p').attr('style', 'color: red');
-      //   $j('h3').attr('style', 'color: red');
-      //   $j('h3').html('Invalid Text!!!');
-      // } else if (e.target.value.length <= this.quote.length) {
-      //   $j('p').attr('style', 'color: black');
-      //   $j('h3').html('');
-      // }
     }
   }
 
@@ -109,7 +105,6 @@ class TextSpeed {
     this.done = true;
     clearInterval(this.interval);
     setTimeout(() => $j('p').attr('style', 'color: green; font-size: 24px;'), 50);
-    // $j('textarea').val(e.target.value + e.key);
     $j('h3').attr('style', 'color: green');
     $j('h3').html('You Finished!!!');
     $j('html').attr('style', `background: url(${this.celebrationGifs[Math.floor(Math.random() * this.celebrationGifs.length)]}) no-repeat center center fixed; background-size: cover;`);
@@ -119,7 +114,8 @@ class TextSpeed {
 
   handleClick() {
     this.quote = this.pickAQuote();
-    $j('h2').html(this.quote);
+    $j('h2').html('');
+    this.makeQuote();
     this.startTime = undefined;
     $j('p').html(`${this.generateTimeScore(this.startTime)}`);
     clearInterval(this.interval)
