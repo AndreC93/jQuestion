@@ -22,7 +22,7 @@ class TextSpeed {
     this.startTime;
     this.done = false;
     this.interval;
-    this.defaultBodyStyling = 'background: white; margin: 100px auto; text-align: center; width: 700px; padding: 20px;';
+    this.defaultBodyStyling = 'background: white; margin: 100px auto; text-align: center; width: 700px; padding: 20px; position: relative; transition: margin-top 1s ease-in;';
     this.celebrationGifs = ['./type_speed/images/clapping.gif',
       './type_speed/images/emma_watson.gif',
       './type_speed/images/hats_off.gif',
@@ -76,7 +76,7 @@ class TextSpeed {
   }
 
   handleChange(e) {
-    if (this.done) {
+    if (this.done || e.key === 'Shift') {
       e.preventDefault();
     } else {
       if (this.startTime === undefined) {
@@ -108,8 +108,9 @@ class TextSpeed {
     $j('h3').attr('style', 'color: green');
     $j('h3').html('You Finished!!!');
     $j('html').attr('style', `background: url(${this.celebrationGifs[Math.floor(Math.random() * this.celebrationGifs.length)]}) no-repeat center center fixed; background-size: cover;`);
-    $j('body').attr('style', this.defaultBodyStyling + ' margin-top: 85vh; transition: margin-top 1s ease-in;');
+    $j('body').attr('style', this.defaultBodyStyling + ' margin-top: 85vh;');
     $j('button').each( button => button.focus());
+    $j('button').attr('style', 'padding: 6px 10px; color: brown; background: azure; font-weight: bolder;')
   }
 
   handleClick() {
@@ -124,7 +125,7 @@ class TextSpeed {
     $j('p').attr('style', 'color: black');
     $j('h3').html('');
     $j('html').attr('style', "background: url('https://www.textrazor.com/img/letters_inverse.png')");
-    $j('body').attr('style', this.defaultBodyStyling + ' margin-top: 100px; transition: margin-top 1s ease-in;');
+    $j('body').attr('style', this.defaultBodyStyling);
   }
 
   generateTimeScore(start, end = (new Date)) {
