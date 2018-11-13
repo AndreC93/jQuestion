@@ -9,13 +9,13 @@ class TextSpeed {
       "I solemnly swear that I am up to no good.",
       "Fear of a name increases fear of the thing itself.",
       "Time will not slow down when something unpleasant lies ahead.",
-      "Just because you have the emotional range of a teaspoon doesn't mean we all have.",
+      "Neither can live while the other survives...",
       "It does not do to dwell on dreams and forget to live.",
       "Don't let the muggles get you down.",
       "What's comin' will come, and we'll meet it when it does.",
       "Once again, you show all the sensitivity of a blunt axe.",
-      "It takes a great deal of bravery to stand up to our enemies, but just as much to stand up to our friends.",
-      "If you want to know what a man's like, take a good look at how he treats his inferiors, not his equals."
+      "To the well-organized mind, death is but the next great adventure.",
+      "It matters not what someone is born, but what they grow to be."
     ];
     this.pastIndex;
     this.quote = this.pickAQuote();
@@ -60,8 +60,9 @@ class TextSpeed {
     $j('section').append('<br>').append("<textarea rows='6' cols='60' >");
     $j('.main').append(`<p>${this.generateTimeScore(this.startTime)}</p>`).append(`<h3 style='color: red' ></h3>`);
     $j('.main').append('<button>Reset Text</button>');
-    $j('textarea').on('change', ((e) => this.handleChange(e)));
-    $j('textarea').on('keydown', ((e) => this.handleChange(e)));
+    $j('textarea').on('paste', (e => e.preventDefault() ));
+    $j('textarea').on('change', (e => this.handleChange(e)));
+    $j('textarea').on('keydown', (e => this.handleChange(e)));
     $j('textarea').attr('style', 'font-size: 20px;');
     $j('textarea').on("cut copy paste", e => e.preventDefault());
     $j('button').on('click', () => this.handleClick())
@@ -76,13 +77,15 @@ class TextSpeed {
   }
 
   handleChange(e) {
-    if (this.done || e.key === 'Shift') {
+    if (this.done || e.key === 'Shift' || e.key === 'Meta') {
       e.preventDefault();
     } else {
       if (this.startTime === undefined) {
         this.startTime = new Date;
         this.interval = setInterval(() => $j('p').html(`${this.generateTimeScore(this.startTime)}`, 1000));
-      } else if ((e.target.value === this.quote || e.target.value + e.key === this.quote) && this.done === false) {
+      } else if (e.target.value + e.key === this.quote && this.done === false) {
+        $j('textarea').val(e.target.value + e.key);
+        $j(`.q${e.target.value.length - 1}`).attr('style', 'color: green; display: inline-block; white-space: pre;');
         this.handleSuccess(e);
       } else if (e.key === 'Backspace'){
         const deleteIdx = e.target.value.length -1;
@@ -92,9 +95,9 @@ class TextSpeed {
         for(let i = 0; i <= inputStr.length; i++) {
           const quoteLetter = $j(`.q${i}`);
           if (quoteLetter.html() === inputStr[i] || (i === inputStr.length && e.key === quoteLetter.html())) {
-            $j(`.q${i}`).attr('style','color: green; display: inline-block; white-space: pre;');
+            quoteLetter.attr('style','color: green; display: inline-block; white-space: pre;');
           } else if(e.key) {
-            $j(`.q${i}`).attr('style', 'color: red; display: inline-block; white-space: pre;')
+            quoteLetter.attr('style', 'color: red; display: inline-block; white-space: pre;')
           }
         }
       }
