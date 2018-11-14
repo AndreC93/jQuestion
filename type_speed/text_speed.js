@@ -112,7 +112,7 @@ class TextSpeed {
     $j('h3').html('You Finished!!!');
     $j('html').attr('style', `background: url(${this.celebrationGifs[Math.floor(Math.random() * this.celebrationGifs.length)]}) no-repeat center center fixed; background-size: cover;`);
     $j('body').attr('style', this.defaultBodyStyling + ' margin-top: 85vh;');
-    $j('button').each( button => button.focus());
+    $j('button').each( button => button.focus() );
     $j('button').attr('style', 'padding: 6px 10px; color: brown; background: azure; font-weight: bolder;')
   }
 
@@ -129,6 +129,7 @@ class TextSpeed {
     $j('h3').html('');
     $j('html').attr('style', "background: url('https://www.textrazor.com/img/letters_inverse.png')");
     $j('body').attr('style', this.defaultBodyStyling);
+    $j('textarea').each( text => text.focus() );
   }
 
   generateTimeScore(start, end = (new Date)) {
