@@ -31,6 +31,7 @@ class TextSpeed {
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSuccess = this.handleSuccess.bind(this);
+    this.seeScore = this.seeScore.bind(this);
   }
 
   generateRandomIndex() {
@@ -53,6 +54,7 @@ class TextSpeed {
   makePage() {
     $j('html').attr('style', "background: url('https://www.textrazor.com/img/letters_inverse.png')");
     $j('body').attr('style', this.defaultBodyStyling);
+    $j('.main').append("<div class='seeScoreButton' style='display: none;'>See Score</div>");
     $j('.main').append('<div><h1>Welcome to Text Speed Test</h1><span></span><h2></h2><section/></div>');
     $j('span').html('Type out the quote below and see how fast you can do it without typos.')
     $j('span').attr('style', 'font-style: italic;')
@@ -63,6 +65,7 @@ class TextSpeed {
     $j('textarea').on('paste', (e => e.preventDefault() ));
     $j('textarea').on('change', (e => this.handleChange(e)));
     $j('textarea').on('keydown', (e => this.handleChange(e)));
+    $j('.seeScoreButton').on('click', this.seeScore);
     $j('textarea').attr('style', 'font-size: 20px;');
     $j('textarea').on("cut copy paste", e => e.preventDefault());
     $j('button').on('click', () => this.handleClick())
@@ -109,11 +112,16 @@ class TextSpeed {
     clearInterval(this.interval);
     setTimeout(() => $j('p').attr('style', 'color: green; font-size: 24px;'), 50);
     $j('h3').attr('style', 'color: green');
-    $j('h3').html('You Finished!!!');
+    $j('h3').html(`You can type ${this.wordsPerMin()} words per minute`);
     $j('html').attr('style', `background: url(${this.celebrationGifs[Math.floor(Math.random() * this.celebrationGifs.length)]}) no-repeat center center fixed; background-size: cover;`);
+    $j('.seeScoreButton').attr('style', 'display: block; position: absolute; top: -10%; left: 44 %; color: white; font-size: 25px; cursor: pointer;');
     $j('body').attr('style', this.defaultBodyStyling + ' margin-top: 85vh;');
     $j('button').each( button => button.focus() );
     $j('button').attr('style', 'padding: 6px 10px; color: brown; background: azure; font-weight: bolder;')
+  }
+
+  wordsPerMin() {
+    return Math.ceil(this.quote.split(' ').length * 60 / (parseInt(this.generateTimeScore(this.startTime).split(' ')[0]) ));
   }
 
   handleClick() {
@@ -124,12 +132,17 @@ class TextSpeed {
     $j('p').html(`${this.generateTimeScore(this.startTime)}`);
     clearInterval(this.interval)
     this.done = false;
+    $j('.seeScoreButton').attr('style', 'display: none;');
     $j('textarea').val('');
     $j('p').attr('style', 'color: black');
     $j('h3').html('');
     $j('html').attr('style', "background: url('https://www.textrazor.com/img/letters_inverse.png')");
     $j('body').attr('style', this.defaultBodyStyling);
     $j('textarea').each( text => text.focus() );
+  }
+
+  seeScore() {
+    $j('body').attr('style', this.defaultBodyStyling + ' margin-top: 100px;')
   }
 
   generateTimeScore(start, end = (new Date)) {
