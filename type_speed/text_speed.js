@@ -114,16 +114,16 @@ class TextSpeed {
     $j('h3').attr('style', 'color: green');
     $j('h3').html(`You can type ${this.wordsPerMin()} words per minute`);
     $j('html').attr('style', `background: url(${this.celebrationGifs[Math.floor(Math.random() * this.celebrationGifs.length)]}) no-repeat center center fixed; background-size: cover;`);
-    $j('.seeScoreButton').attr('style', 'display: block; position: absolute; top: -10%; left: 44 %; color: white; font-size: 25px; cursor: pointer;');
+    $j('.seeScoreButton').attr('style', 'display: block; position: absolute; top: -10%; left: 44%; color: white; font-size: 25px; cursor: pointer;');
     $j('body').attr('style', this.defaultBodyStyling + ' margin-top: 85vh;');
     $j('button').each( button => button.focus() );
     $j('button').attr('style', 'padding: 6px 10px; color: brown; background: azure; font-weight: bolder;')
   }
-
+  
   wordsPerMin() {
     return Math.ceil(this.quote.split(' ').length * 60 / (parseInt(this.generateTimeScore(this.startTime).split(' ')[0]) ));
   }
-
+  
   handleClick() {
     this.quote = this.pickAQuote();
     $j('h2').html('');
@@ -140,11 +140,12 @@ class TextSpeed {
     $j('body').attr('style', this.defaultBodyStyling);
     $j('textarea').each( text => text.focus() );
   }
-
+  
   seeScore() {
-    $j('body').attr('style', this.defaultBodyStyling + ' margin-top: 100px;')
+    $j('body').attr('style', this.defaultBodyStyling + ' margin-top: 100px;');
+    $j('button').each( button => button.focus() );
   }
-
+  
   generateTimeScore(start, end = (new Date)) {
     if (start === undefined) return 'Time will start when you start typing.';
     const diff = (end - start) / 1000;
