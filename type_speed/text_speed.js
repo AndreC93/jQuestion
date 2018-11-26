@@ -86,7 +86,8 @@ class TextSpeed {
       if (this.startTime === undefined) {
         this.startTime = new Date;
         this.interval = setInterval(() => $j('p').html(`${this.generateTimeScore(this.startTime)}`, 1000));
-      } else if (e.target.value + e.key === this.quote && this.done === false) {
+      } 
+      if (e.target.value + e.key === this.quote && this.done === false) {
         $j('textarea').val(e.target.value + e.key);
         $j(`.q${e.target.value.length - 1}`).attr('style', 'color: green; display: inline-block; white-space: pre;');
         this.handleSuccess(e);
