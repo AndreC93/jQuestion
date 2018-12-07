@@ -30,7 +30,7 @@ A JavaScript library for making HTML manipulation and traversal, event handling,
    * `.addClass(classes)`: use to add a HTML class or classes to each selected element. For multiple classes to be added at once, separate them with a space within the same string.
    * `.removeClass(classes)`: use to remove a HTML class or classes from each selected element. For multiple classes to be removed at once, separate them with a space within the same string.
    * `.children()`: selects all immediate children of the selected elements and returns them as a new instance of jQuestion.
-   * `.parent()`: selects all immediate parents of the selected elements and returns them as a new instance of jQuestion
+   * `.parent()`: selects all immediate parents of the selected elements and returns them as a new instance of jQuestion.
    * `.find(selector)`: selects all children (recursively) that match the given selector and returns them as a new instance of jQuestion.
    * `.remove()`: removes all selected elements from the DOM.
    * `.val(value)`: use to set the value on all selected nodes with the given value, if no value given, '' is used by default.
