@@ -6,7 +6,7 @@ A JavaScript library for making HTML manipulation and traversal, event handling,
 
 
 ## Set Up
-* Place this `<script src="https://rawgit.com/AndreC93/jQuestion/master/lib/jquestion.js"></script>` inside your HTML file. 
+* Place this `<script src="https://cdn.jsdelivr.net/gh/AndreC93/jQuestion@master/lib/jquestion.js"></script>` inside your HTML file. 
 
 ## DOM Manipulation and Traversal
 * Use `$j(selector)` to select HTML elements from the page. 
